@@ -8,6 +8,7 @@ function sum(x,y){
   return x+y
 }
 
+
 2) 
 function consoleReturn(x,y){
   console.log(x)
@@ -35,16 +36,49 @@ var object2={
 }
 */
 
-//1) WRITE YOUR CODE UNDER THIS LINE         
+//1) WRITE YOUR CODE UNDER THIS LINE    
+  sum = (x, y) => {
+  return x+y;
+}
+console.log(sum(2,2));
+     
 
-//2) WRITE YOUR CODE UNDER THIS LINE         
+//2) WRITE YOUR CODE UNDER THIS LINE 
+consoleReturn = (x,y) => {
+  console.log(x)
+  return y
+}
+console.log(consoleReturn('Here is Y: ', 5));
+        
 
-//3) WRITE YOUR CODE UNDER THIS LINE         
+//3) WRITE YOUR CODE UNDER THIS LINE 
+{
+let name="Alex"
+let age=25
+let result=`My name is: ${name} and my age is: ${age}`
+}
+console.log(result);
+        
 
-//4) WRITE YOUR CODE UNDER THIS LINE         
+//4) WRITE YOUR CODE UNDER THIS LINE  
+let food="Fried Chicken"
+let color="Blue"
+let object={
+  food,
+  color,
+}
+console.log(object.food);
+console.log(object.color);
+       
 
 //5) WRITE YOUR CODE UNDER THIS LINE         
 
+let object2={
+  multi(a,b){
+    return a * b
+  }
+}
+console.log(object2.multi(3, 3));
 
 
 
@@ -73,6 +107,28 @@ Output =>
 */
 
 // WRITE YOUR CODE UNDER THIS LINE
+class Computer{
+
+  constructor(OS, RAM, CPU){
+    this.OS = OS;
+    this.RAM = RAM;
+    this.CPU = CPU;
+  }
+  doubleRAM = () => this.RAM * 2;
+}
+
+const Computer1 = new Computer('Windows',16,'I7');
+Computer1.doubleRAM(); 
+console.log(Computer1);
+
+const Computer2 = new Computer('Linux',8,'I5'); 
+Computer2.doubleRAM(); 
+console.log(Computer2);
+
+const Computer3 = new Computer('Mac',4,'I3'); 
+Computer3.doubleRAM(); 
+console.log(Computer3);
+
 
 
 
@@ -86,43 +142,56 @@ please fix the errors inside them
 */
 
 // App Component
-import Tasks from './components/Tasks';
+{
+  import React, {Component} from 'react';
+  import Tasks from './Tasks';
 
 export default class App extends Component {
-  state = {
-    title: 'ELIZABETH GREENE',
-    todos: ['eat', 'eat eat', 'eact again']
-  };
-  changeTitle() {
-    state.title = 'AGGREGOR ZOLDYCK'
-  }
-  render() {
-    return (
-      <h1>App Component => state.title</h1>
-      <button onClick={this.changeTitle}>Change Title</button>
-      <Tasks tasks={this.todos} changeTitleFromChild={this.changeTitle} />
-    );
+    state = {
+      title: 'ELIZABETH GREENE',
+      todos: ['eat', 'eat eat', 'eat again']
+    };
+
+    changeTitle() {
+      this.title.setMovieState('AGGREGOR ZOLDYCK'); 
+    }
+    changeTasks(){
+      this.todos[0].setState('Watch Movie');
+      this.todos[1].setState('Watch REAL MADRID Match');
+      this.todos[2].setState('Have Fun With Friends');
+    }
+    render() {
+      return (
+        <div>
+          <h1>App Component => {this.state.title} </h1>
+          <button onClick={this.changeTitle}>Change Title</button>
+          <Tasks tasks={this.changeTasks} changeTitleFromChild={this.changeTitle} />
+        </div>
+      );
+    }
   }
 }
 
 // Tasks Component
-import React, { Component } from 'react';
+{
+  import React, { Component } from 'react';
 
-class Tasks extends Component {
-  state = {
-    day: "Sat"
-  };
-  changeDay() {
-    day = 'Sun'
-  }
+  export default class Tasks extends Component {
+    state = {
+      day: "Sat"
+    };
+    changeDay() {
+      this.title.setState('Sun');
+    }
 
-  render() {
-    return (
-      <div>
-        <h1>Tasks Component => state.day</h1>
-        <button onClick={this.changeDay}>Change Tasks State</button>
-        <button onClick={changeTitle}>Change App State</button>
-      </div>
-    );
+    render() {
+      return (
+        <div>
+          <h1>Tasks Component => {this.state.day}</h1>
+          <button onClick={this.props.tasks}>Change Tasks State</button>
+          <button onClick={this.props.changeTitleFromChild}>Change App State</button>
+        </div>
+      );
+    }
   }
 }
